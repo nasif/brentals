@@ -1,0 +1,36 @@
+{
+  "name": "brentals",
+  "version": "1.0.0",
+  "engines": {
+    "node": "6.11.3"
+  }, 
+  "description": "nodejs web application for hosting berentals",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://tush123_freelancer@bitbucket.org/tush123_freelancer/brentals.git"
+  },
+  "keywords": [
+    "brentals",
+    "camera",
+    "lens",
+    "rent",
+    "hire"
+  ],
+  "author": "Pradeep Srini",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/tush123_freelancer/brentals#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "consolidate": "^0.14.5",
+    "cors": "^2.8.4",
+    "express": "^4.16.1",
+    "fs": "0.0.1-security",
+    "json2xls": "^0.1.2",
+    "mongodb": "^2.2.31",
+    "path": "^0.12.7"
+  }
+}

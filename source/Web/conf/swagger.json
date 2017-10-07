@@ -1,0 +1,525 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Smart Parking",
+        "contact": {
+            "name": "Cloud-Solutions"
+        }
+    },
+    "host": "172.16.5.5:3060",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/honour": {
+            "get": {
+                "tags": [
+                    "Checking Application"
+                ],
+                "summary": "Checking Application Working fine",
+                "produces": [
+                    "application/text"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "description": "Enter name which need to be honoured",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "auth token",
+                        "name": "token",
+                        "required": false,
+                        "type": "string",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Checking Response",
+                        "schema": {
+                            "type": "string",
+                            "items": {
+                                "$ref": "#/definitions/resDescription"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Name"
+                    }
+                }
+            }
+        },
+        "/registrationService": {
+            "post": {
+                "tags": [
+                    "User Registration"
+                ],
+                "summary": "User Registration Service",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "required": true,
+                        "in": "body",
+                        "description": "User details that need to be added",
+                        "schema": {
+                            "$ref": "#/definitions/user"
+                        }
+                    },
+                    {
+                        "description": "auth token",
+                        "name": "token",
+                        "type": "string",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/userResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Check User Details",
+                        "schema": {
+                            "$ref": "#/definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/loginService": {
+            "post": {
+                "tags": [
+                    "Login Service"
+                ],
+                "summary": "Login Service",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "Login Service",
+                        "schema": {
+                            "$ref": "#/definitions/loginDetails"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/loginResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Check Login Details",
+                        "schema": {
+                            "$ref": "#/definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/updateNewPassword": {
+            "post": {
+                "tags": [
+                    "Update New Password"
+                ],
+                "summary": "Update New Password",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "New Password Details",
+                        "schema": {
+                            "$ref": "#/definitions/updatePasswordDetails"
+                        }
+                    },
+                    {
+                        "description": "auth token",
+                        "name": "token",
+                        "type": "string",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/passwordUpdateSuccessResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Check Update Password Details",
+                        "schema": {
+                            "$ref": "#/definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/getParkingSpots": {
+            "post": {
+                "tags": [
+                    "Get Parking Spots"
+                ],
+                "summary": "Get Parking Spots",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "Get Parking Spots",
+                        "schema": {
+                            "$ref": "#/definitions/parkingSpotsDetailsRequestObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/parkingSpotDetails"
+                        }
+                    },
+                    "default": {
+                        "description": "Check Parking Spot Request Details",
+                        "schema": {
+                            "$ref": "#/definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/updateParkingSpots": {
+            "post": {
+                "tags": [
+                    "Updating Parking Spots"
+                ],
+                "summary": "Updating Parking Spots with the User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "description": "Update Parking Spots",
+                        "schema": {
+                            "$ref": "#/definitions/updateParkingSpotsRequestObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/updateParkingSpotDetails"
+                        }
+                    },
+                    "default": {
+                        "description": "Check update parking spot details",
+                        "schema": {
+                            "$ref": "#/definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/getCountryCodeService": {
+            "get": {
+                "tags": [
+                    "Getting Country Name and Code"
+                ],
+                "summary": "Getting Country Name and Calling Code",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "$ref": "#/definitions/getCountryCodeServiceDetails"
+                        }
+                    },
+                    "default": {
+                        "description": "No Data Found",
+                        "schema": {
+                            "$ref": "#/definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "resDescription": {
+            "type": "string"
+        },
+        "user": {
+            "type": "object",
+            "required": [
+                "firstname",
+                "lastname",
+                "email",
+                "password",
+                "mobileNumber"
+            ],
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "mobileNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "userResponse": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "errorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "boolean"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "loginDetails": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "loginResponse": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "updatePasswordDetails": {
+            "type": "object",
+            "required": [
+                "userToken",
+                "oldPassword",
+                "newPassword",
+                "confirmPassword"
+            ],
+            "properties": {
+                "userToken": {
+                    "type": "string"
+                },
+                "oldPassword": {
+                    "type": "string"
+                },
+                "newPassword": {
+                    "type": "string"
+                },
+                "confirmPassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "passwordUpdateSuccessResponse": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "parkingSpotsDetailsRequestObject": {
+            "type": "object",
+            "required": [
+                "latitude",
+                "longitude"
+            ],
+            "properties": {
+                "latitude": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "longitude": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "radius": {
+                    "type": "integer"
+                }
+            }
+        },
+        "parkingSpotDetails": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/parkingSpot"
+                    }
+                }
+            }
+        },
+        "parkingSpot": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "latitude": {
+                    "type": "integer"
+                },
+                "longitude": {
+                    "type": "integer"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "parkingStatus": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "updateParkingSpotsRequestObject": {
+            "type": "object",
+            "required": [
+                "userToken",
+                "parkingLotToken",
+                "parkingStatus"
+            ],
+            "properties": {
+                "userToken": {
+                    "type": "string"
+                },
+                "parkingLotToken": {
+                    "type": "string"
+                },
+                "parkingStatus": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateParkingSpotDetails": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "getCountryCodeServiceDetails": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/countryCodeDetails"
+                    }
+                }
+            }
+        },
+        "countryCodeDetails": {
+            "type": "object",
+            "properties": {
+                "countryName": {
+                    "type": "string"
+                },
+                "countryCode": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
